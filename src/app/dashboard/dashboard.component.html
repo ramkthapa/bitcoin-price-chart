@@ -1,0 +1,74 @@
+
+<!-- Form to select currency and select start date and end date-->
+<form
+  (ngSubmit)="getHistoricRates(historicRateForm)"
+  #historicRateForm="ngForm"
+>
+  <h1 class="text-center">Bitcoin Value</h1>
+  <div class="form-group">
+    <label>Currency: </label>
+    <select
+      class="form-control"
+      #currency="ngModel"
+      name="currency"
+      [(ngModel)]="form.currency"
+      required
+    >
+      <option *ngFor="let c of currencies" [value]="c.value">
+        {{ c.name }}
+      </option>
+    </select>
+
+  </div>
+
+<div class="form-group">
+    <label>Start Date: </label>
+    <input
+      type="date"
+      class="form-control"
+      placeholder="Start Date"
+      #startDate="ngModel"
+      name="startDate"
+      [(ngModel)]="form.startDate"
+      required
+      pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
+    />
+
+  </div>
+<div class class="form-group">
+    <label>End Date: </label>
+    <input
+      type="date"
+      class="form-control"
+      placeholder="End Date"
+      #endDate="ngModel"
+      name="endDate"
+      [(ngModel)]="form.endDate"
+      required
+      pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
+    />
+
+<button class="submit">Render</button>
+</div>
+</form>
+<br />
+
+
+
+
+<!-- Chart started -->
+
+<div class="chart-wrapper" style="display: block">
+  <canvas baseChart
+  height="400"
+  width="1000"
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType"
+      [plugins]="lineChartPlugins">
+  </canvas>
+</div>
+
