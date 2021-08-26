@@ -65,6 +65,11 @@ export class DashboardComponent implements OnInit {
         value: key
       }))
     }
+
+    this.currentDate();
+    this.previousDate();
+
+    this.getHistoricRates(this.form);
   }
 
   // Get available currencies
@@ -103,6 +108,22 @@ export class DashboardComponent implements OnInit {
           }
         ]
       })
+  }
+
+  // Get date for last 10 days
+  previousDate() {
+    const lastDate = new Date();
+    lastDate.setDate(lastDate.getDate() - 10); // minus 10 days
+    const finalPreviousDate = lastDate.getFullYear() +'-'+ ((lastDate.getMonth() + 1) < 10 ? '0' : '') + (lastDate.getMonth() + 1) +'-'+ lastDate.getDate();
+    this.form.startDate = finalPreviousDate;
+  }
+
+  // Get Today's date
+  currentDate() {
+    const todaysDate = new Date();
+    todaysDate.setDate(todaysDate.getDate());
+    const finalCurrentDate = todaysDate.getFullYear() +'-'+ ((todaysDate.getMonth() + 1) < 10 ? '0' : '') + (todaysDate.getMonth() + 1) +'-'+ todaysDate.getDate();
+    this.form.endDate = finalCurrentDate;
   }
 
 
